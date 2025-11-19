@@ -19,4 +19,28 @@
     <color name="success_green">#FF4CAF50</color>
     <color name="error_red">#FFF44336</color>
     <color name="warning_orange">#FFFF9800</color>
+    <color name="blue">#4A6CF7</color>
+    <color name="blue_light">#AFC8FF</color>
+    <color name="blue_lighter">#E3ECFF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="gray_light">#BDBDBD</color>
+    <color name="gray_lighter">#E0E0E0</color>
+
+    <color name="error_red">#FF3B30</color>
+    <color name="success_green">#4CAF50</color>
+    <color name="warning_yellow">#FFCC00</color>
+
+    <color name="marker_dark">#202020</color>
+    <color name="chart_bg_start">#E3ECFF</color>
+    <color name="chart_bg_center">#C8DAFF</color>
+    <color name="chart_bg_end">#AFC8FF</color>
+
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#9E9E9E</color>
+
+    <color name="transparent">#00FFFFFF</color>
 </resources>
