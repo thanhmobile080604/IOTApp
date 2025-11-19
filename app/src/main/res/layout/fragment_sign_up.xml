@@ -11,12 +11,12 @@
     <!-- Back Button -->
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/ic_arrow_back"
+        android:scaleType="centerCrop"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +62,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFullName"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -97,6 +98,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -223,6 +225,7 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
