@@ -12,7 +12,6 @@
                                                    android:background="@color/white"
                                                    tools:context=".ui.dashboard.DashboardFragment">
 
-    <!-- Top App Title -->
     <TextView
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
@@ -25,7 +24,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Top Cards container -->
     <LinearLayout
             android:id="@+id/topCards"
             android:layout_width="0dp"
@@ -38,7 +36,6 @@
             android:gravity="center"
             android:weightSum="2">
 
-        <!-- Heart Rate Card -->
         <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardHeartRate"
                 style="@style/Widget.MaterialComponents.CardView"
@@ -94,7 +91,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- HRV Card -->
         <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardHRV"
                 style="@style/Widget.MaterialComponents.CardView"
@@ -151,10 +147,9 @@
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-    <!-- Segment control (Heart Rate / HRV) -->
     <com.google.android.material.chip.ChipGroup
             android:id="@+id/segmentGroup"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             app:singleSelection="true"
@@ -179,7 +174,6 @@
                 android:text="HRV" />
     </com.google.android.material.chip.ChipGroup>
 
-    <!-- Slider / Seek (min - value - max with labels) -->
     <TextView
             android:id="@+id/tvRangeLabel"
             android:layout_width="wrap_content"
@@ -191,7 +185,6 @@
             app:layout_constraintTop_toBottomOf="@id/segmentGroup"
             app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Short description -->
     <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="0dp"
@@ -202,6 +195,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvRangeLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+
     <TextView
             android:id="@+id/tvDescription"
             android:layout_width="0dp"
@@ -214,7 +208,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Tabs Week / Month / Year (using TabLayout) -->
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabRange"
             android:layout_width="wrap_content"
@@ -226,20 +219,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabWeek"
-                android:text="Week" />
-
-        <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabMonth"
-                android:text="Month" />
-
-        <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabYear"
-                android:text="Year" />
     </com.google.android.material.tabs.TabLayout>
 
-    <!-- Chart area (placeholder view) -->
+
     <FrameLayout
             android:id="@+id/chartContainer"
             android:layout_width="0dp"
@@ -250,14 +232,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Replace this with a real chart (e.g., MPAndroidChart LineChart) -->
         <View
                 android:id="@+id/chartPlaceholder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/chart_placeholder_bg" />
 
-        <!-- Example vertical marker (to mimic tallest point on image) -->
         <View
                 android:id="@+id/verticalMarker"
                 android:layout_width="4dp"
@@ -268,7 +248,6 @@
 
     </FrameLayout>
 
-    <!-- X axis labels row -->
     <LinearLayout
             android:id="@+id/xLabels"
             android:layout_width="0dp"
@@ -306,10 +285,9 @@
                 android:textColor="@color/gray" />
     </LinearLayout>
 
-    <!-- Measure Again button -->
     <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMeasure"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="18dp"
             android:text="Measure Again"
@@ -322,7 +300,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom safe spacing -->
     <View
             android:id="@+id/bottomSpacer"
             android:layout_width="0dp"

@@ -6,8 +6,10 @@ import com.example.iotapp.MainViewModel
 import com.example.iotapp.R
 import com.example.iotapp.base.BaseFragment
 import com.example.iotapp.databinding.FragmentDashboardBinding
+import com.example.iotapp.repository.AuthRepository
 
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
+    private val authRepository = AuthRepository()
 
     override fun FragmentDashboardBinding.initView() {
         tvHRValue.text = "70"
@@ -56,5 +58,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboa
     }
 
     override fun initObserver() {
+        mainViewModel.navigateToSignIn.observe(viewLifecycleOwner) { shouldNavigate ->
+            if (shouldNavigate == true) {
+                Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
+                navigateTo(R.id.signInFragment)
+                mainViewModel.navigateToSignIn.value = false
+            }
+        }
     }
 }
