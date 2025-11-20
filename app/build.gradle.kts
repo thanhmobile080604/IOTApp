@@ -43,6 +43,13 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    packagingOptions {
+        resources {
+            excludes += "META-INF/NOTICE.md"
+            excludes += "META-INF/LICENSE*"
+        }
+    }
 }
 
 dependencies {
@@ -81,6 +88,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     ksp("com.github.bumptech.glide:compiler:4.16.0")
 
-    implementation("com.github.1902shubh:SendMail:1.0.0")
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
 
 }
