@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">IOTApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="outside_moisture">Outside Moisture</string>
+    <string name="temperature">Temperature</string>
+    <string name="dirt_moisture">Dirt Moisture</string>
+    <string name="connect">Connect</string>
+    <string name="pumper_status">Pumper Status</string>
+    <string name="pumper_alarm">Pumper Alarm</string>
+    <string name="pump_now">Pump now</string>
+    <string name="online">Online</string>
+    <string name="offline_label">Offline</string>
+    <string name="adjust_for_automatic_pumper">Adjust for automatic pumper</string>
+    <string name="save">Save</string>
+    <string name="date">Date:</string>
+    <string name="time">Time:</string>
+    <string name="language">Language</string>
+    <string name="english_label">English</string>
+    <string name="vietnamese_label">Vietnamese</string>
+    <string name="celsius_label">Celsius (°C)</string>
+    <string name="fahrenheit_label">Fahrenheit (°F)</string>
+    <string name="status_on">ON</string>
+    <string name="status_off">OFF</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="invalid_time_message">Please enter date/time in correct format</string>
+    <string name="invalid_time_hint">Invalid format</string>
+    <string name="no_schedule">No schedule</string>
+    <string name="log_out">Log out</string>
 </resources>

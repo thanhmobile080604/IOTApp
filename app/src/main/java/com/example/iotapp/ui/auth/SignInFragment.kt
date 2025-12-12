@@ -32,7 +32,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
         mainViewModel.navigateToDashboard.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate == true) {
-                navigateTo(R.id.dashboardFragment)
+                navigateTo(R.id.homeFragment)
                 mainViewModel.navigateToDashboard.value = false
             }
         }

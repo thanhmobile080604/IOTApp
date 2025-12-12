@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_green_gradient"
+    tools:context=".ui.dashboard.HomeFragment">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/freeman_regular"
+        android:text="@string/home"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_shadow"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="18dp"
+        android:background="@drawable/bg_white_12"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view"
+        app:layout_constraintWidth_percent="0.26" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_white_12"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@id/view3"
+        app:layout_constraintStart_toEndOf="@id/view1"
+        app:layout_constraintTop_toTopOf="@id/view1"
+        app:layout_constraintWidth_percent="0.26" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="18dp"
+        android:background="@drawable/bg_white_12"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view"
+        app:layout_constraintWidth_percent="0.26" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white_12"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="@id/view1"
+        app:layout_constraintTop_toBottomOf="@id/view1"
+        app:layout_constraintWidth_percent="0.26" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_white_12"
+        app:layout_constraintBottom_toBottomOf="@id/view4"
+        app:layout_constraintEnd_toEndOf="@id/view3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/view4"
+        app:layout_constraintTop_toTopOf="@id/view4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="18dp"
+        android:background="@drawable/bg_white_12"
+        app:layout_constraintBottom_toBottomOf="@id/view"
+        app:layout_constraintEnd_toEndOf="@id/view5"
+        app:layout_constraintStart_toStartOf="@id/view1"
+        app:layout_constraintTop_toBottomOf="@id/view4" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_6adf9b_12"
+        app:layout_constraintDimensionRatio="133:47"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <ImageView
+        android:id="@+id/icOutsideMoisture"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_outside_moisture"
+        app:layout_constraintStart_toStartOf="@id/view1"
+        app:layout_constraintTop_toTopOf="@id/view1" />
+
+    <ImageView
+        android:id="@+id/icTemperature"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_temperature"
+        app:layout_constraintStart_toStartOf="@id/view2"
+        app:layout_constraintTop_toTopOf="@id/view2" />
+
+    <ImageView
+        android:id="@+id/icDirtMoisture"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_dirt_moisture"
+        app:layout_constraintStart_toStartOf="@id/view3"
+        app:layout_constraintTop_toTopOf="@id/view3" />
+
+    <ImageView
+        android:id="@+id/icOnline"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_online"
+        app:layout_constraintStart_toStartOf="@id/view4"
+        app:layout_constraintTop_toTopOf="@id/view4" />
+
+    <ImageView
+        android:id="@+id/icTurnOnPumper"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_turn_on"
+        app:layout_constraintStart_toStartOf="@id/view5"
+        app:layout_constraintTop_toTopOf="@id/view5" />
+
+    <ImageView
+        android:id="@+id/icTime"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_time"
+        app:layout_constraintStart_toStartOf="@id/view6"
+        app:layout_constraintTop_toTopOf="@id/view6" />
+
+    <TextView
+        android:id="@+id/tvOutsideMoisture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="@string/outside_moisture"
+        android:textColor="@color/color_447661"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/view1"
+        app:layout_constraintStart_toStartOf="@id/icOutsideMoisture"
+        app:layout_constraintTop_toBottomOf="@id/icOutsideMoisture" />
+
+    <TextView
+        android:id="@+id/tvTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="@string/temperature"
+        android:textColor="@color/color_447661"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/icTemperature"
+        app:layout_constraintTop_toBottomOf="@id/icTemperature" />
+
+    <TextView
+        android:id="@+id/tvDirtMoisture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="@string/dirt_moisture"
+        android:textColor="@color/color_447661"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/icDirtMoisture"
+        app:layout_constraintTop_toBottomOf="@id/icDirtMoisture" />
+
+    <TextView
+        android:id="@+id/tvOnline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="@string/connect"
+        android:textColor="@color/color_447661"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/icOnline"
+        app:layout_constraintTop_toBottomOf="@id/icOnline" />
+
+    <TextView
+        android:id="@+id/tvTurnOnPumper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="@string/pumper_status"
+        android:textColor="@color/color_447661"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/icTurnOnPumper"
+        app:layout_constraintTop_toTopOf="@id/icTurnOnPumper" />
+
+    <TextView
+        android:id="@+id/tvPumperAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="@string/pumper_alarm"
+        android:textColor="@color/color_447661"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/view1"
+        app:layout_constraintStart_toEndOf="@id/icTime"
+        app:layout_constraintTop_toTopOf="@id/icTime" />
+
+    <TextView
+        android:id="@+id/tvPumperSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="On / Off"
+        android:textColor="@color/color_447661"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/bgButton"
+        app:layout_constraintStart_toStartOf="@id/icTurnOnPumper"
+        app:layout_constraintTop_toTopOf="@id/bgButton" />
+
+    <TextView
+        android:id="@+id/tvAlarmDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="Date: 30/12/2025"
+        android:textColor="@color/color_447661"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/icTime"
+        app:layout_constraintTop_toBottomOf="@id/icTime" />
+
+    <TextView
+        android:id="@+id/tvHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/freeman_regular"
+        android:maxLines="2"
+        android:text="Time: 15:30"
+        android:textColor="@color/color_447661"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tvAlarmDate"
+        app:layout_constraintTop_toBottomOf="@id/tvAlarmDate" />
+
+    <TextView
+        android:id="@+id/tvPumpNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/freeman_regular"
+        android:text="@string/pump_now"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/view7"
+        app:layout_constraintEnd_toEndOf="@id/view7"
+        app:layout_constraintStart_toStartOf="@id/view7"
+        app:layout_constraintTop_toTopOf="@id/view7" />
+
+    <ImageView
+        android:id="@+id/ivAdjustAlarm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_adjust"
+        app:layout_constraintBottom_toBottomOf="@id/view6"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@id/view6"
+        app:layout_constraintTop_toTopOf="@id/view6"
+        app:layout_constraintWidth_percent="0.12" />
+
+    <TextView
+        android:id="@+id/tvOutsideMoistureReal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/freeman_regular"
+        android:text="74%"
+        android:textColor="@color/color_447661"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/tvOutsideMoisture"
+        app:layout_constraintTop_toBottomOf="@id/tvOutsideMoisture" />
+
+
+    <TextView
+        android:id="@+id/tvTemperatureReal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/freeman_regular"
+        android:text="74%"
+        android:textColor="@color/color_447661"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/tvTemperature"
+        app:layout_constraintTop_toBottomOf="@id/tvTemperature" />
+
+    <TextView
+        android:id="@+id/tvDirtMoistureReal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/freeman_regular"
+        android:text="74%"
+        android:textColor="@color/color_447661"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/tvDirtMoisture"
+        app:layout_constraintTop_toBottomOf="@id/tvDirtMoisture" />
+
+    <TextView
+        android:id="@+id/tvOnlineReal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/freeman_regular"
+        android:text="@string/online"
+        android:textColor="@color/color_447661"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/tvOnline"
+        app:layout_constraintTop_toBottomOf="@id/tvOnline" />
+
+    <View
+        android:id="@+id/bgButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/bg_green_button"
+        android:backgroundTint="@color/light_gray"
+        app:layout_constraintBottom_toBottomOf="@id/view5"
+        app:layout_constraintDimensionRatio="68:32"
+        app:layout_constraintEnd_toEndOf="@id/view5"
+        app:layout_constraintTop_toTopOf="@id/view5"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/knob"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:src="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/bgButton"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="@id/bgButton"
+        app:layout_constraintTop_toTopOf="@id/bgButton"
+        app:round="100dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialogAdjust"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        tools:visibility="gone">
+
+        <View
+            android:id="@+id/bgDialog"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_white_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="372:214"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.26"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <View
+            android:id="@+id/liner1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/light_gray"
+            app:layout_constraintBottom_toBottomOf="@id/bgDialog"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintHeight_percent="0.002"
+            app:layout_constraintStart_toStartOf="@id/bgDialog"
+            app:layout_constraintTop_toTopOf="@id/bgDialog"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <View
+            android:id="@+id/liner2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/light_gray"
+            app:layout_constraintBottom_toBottomOf="@id/bgDialog"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintHeight_percent="0.002"
+            app:layout_constraintStart_toStartOf="@id/bgDialog"
+            app:layout_constraintTop_toTopOf="@id/bgDialog"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/freeman_regular"
+            android:text="@string/adjust_for_automatic_pumper"
+            android:textColor="@color/color_447661"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/liner1"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintStart_toStartOf="@id/bgDialog"
+            app:layout_constraintTop_toTopOf="@id/bgDialog" />
+
+        <TextView
+            android:id="@+id/tvDialogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/freeman_regular"
+            android:text="@string/date"
+            android:textColor="@color/color_447661"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/liner2"
+            app:layout_constraintStart_toStartOf="@id/bgDialog"
+            app:layout_constraintTop_toBottomOf="@id/liner1" />
+
+        <TextView
+            android:id="@+id/tvDialogTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/freeman_regular"
+            android:text="@string/time"
+            android:textColor="@color/color_447661"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tvDialogDate"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogDate" />
+
+        <TextView
+            android:id="@+id/tvSave"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_346348_12"
+            android:fontFamily="@font/freeman_regular"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/bgDialog"
+            app:layout_constraintDimensionRatio="2:1"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintStart_toStartOf="@id/bgDialog"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogTime"
+            app:layout_constraintWidth_percent="0.18" />
+
+        <ImageView
+            android:id="@+id/icAdjustDialog"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_adjust_dialog"
+            app:layout_constraintBottom_toTopOf="@id/liner2"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintTop_toBottomOf="@id/liner1" />
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/freeman_regular"
+            android:hint="30/12/2025"
+            android:textColor="@color/color_447661"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/liner2"
+            app:layout_constraintEnd_toStartOf="@id/icAdjustDialog"
+            app:layout_constraintTop_toBottomOf="@id/liner1" />
+
+        <ImageView
+            android:id="@+id/icAdjustDialog2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="-10dp"
+            android:src="@drawable/ic_adjust_dialog"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintTop_toBottomOf="@id/liner2" />
+
+        <EditText
+            android:id="@+id/etTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/freeman_regular"
+            android:hint="12:30"
+            android:textColor="@color/color_447661"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/icAdjustDialog"
+            app:layout_constraintTop_toBottomOf="@id/liner2" />
+
+        <ImageView
+            android:id="@+id/icCloseDialog"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="@id/bgDialog"
+            app:layout_constraintTop_toTopOf="@id/bgDialog" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
