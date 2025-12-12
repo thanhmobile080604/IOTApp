@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">IOTApp</string>
+    <string name="hello_blank_fragment">Xin chào</string>
+    <string name="home">Trang chủ</string>
+    <string name="outside_moisture">Độ ẩm ngoài trời</string>
+    <string name="temperature">Nhiệt độ</string>
+    <string name="dirt_moisture">Độ ẩm đất</string>
+    <string name="connect">Kết nối</string>
+    <string name="pumper_status">Trạng thái máy bơm</string>
+    <string name="pumper_alarm">Hẹn giờ bơm</string>
+    <string name="pump_now">Bơm ngay</string>
+    <string name="online">Online</string>
+    <string name="offline_label">Offline</string>
+    <string name="adjust_for_automatic_pumper">Điều chỉnh tự động bơm</string>
+    <string name="save">Lưu</string>
+    <string name="date">Ngày:</string>
+    <string name="time">Giờ:</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="english_label">Tiếng Anh</string>
+    <string name="vietnamese_label">Tiếng Việt</string>
+    <string name="celsius_label">Độ C (°C)</string>
+    <string name="fahrenheit_label">Độ F (°F)</string>
+    <string name="status_on">BẬT</string>
+    <string name="status_off">TẮT</string>
+    <string name="invalid_time_message">Sai định dạng ngày/giờ</string>
+    <string name="invalid_time_hint">Kiểm tra định dạng</string>
+    <string name="no_schedule">Chưa đặt lịch</string>
+    <string name="log_out">Đăng xuất</string>
+</resources>
+

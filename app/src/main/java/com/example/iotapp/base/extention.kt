@@ -13,6 +13,7 @@ import android.graphics.Matrix
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Build
 import android.os.SystemClock
 import android.provider.MediaStore
@@ -31,6 +32,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
+import java.util.Properties
+import javax.mail.Message
+import javax.mail.PasswordAuthentication
+import javax.mail.Session
+import javax.mail.Transport
+import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
 import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -408,6 +416,88 @@ private fun applyExifToBitmap(src: Bitmap, exifOrientation: Int): Bitmap {
     } catch (_: OutOfMemoryError) {
         src
     }
+}
+
+//fun sendOtpEmail(userEmail: String, otp: Int) {
+//    val senderEmail = "thanh08062004@gmail.com"  // Tài khoản Gmail của bạn
+//    val senderPassword = "htbxnwhlhioywcuv"  // Mật khẩu ứng dụng (App Password) của bạn
+//
+//    // Cấu hình các thuộc tính SMTP của Gmail
+//    val properties = Properties().apply {
+//        put("mail.smtp.host", "smtp.gmail.com")  // Máy chủ SMTP của Gmail
+//        put("mail.smtp.port", "587")  // Cổng gửi email (587 dùng TLS, 465 dùng SSL)
+//        put("mail.smtp.auth", "true")
+//        put("mail.smtp.starttls.enable", "true")  // Bật TLS
+//    }
+//
+//    // Tạo phiên làm việc email (Session)
+//    val session = Session.getInstance(properties, object : javax.mail.Authenticator() {
+//        override fun getPasswordAuthentication(): PasswordAuthentication {
+//            return PasswordAuthentication(senderEmail, senderPassword)  // Đăng nhập bằng tài khoản Gmail và mật khẩu ứng dụng
+//        }
+//    })
+//
+//    try {
+//        // Tạo thông điệp email
+//        val message = MimeMessage(session).apply {
+//            setFrom(InternetAddress(senderEmail))  // Địa chỉ email người gửi
+//            addRecipient(Message.RecipientType.TO, InternetAddress(userEmail))  // Địa chỉ email người nhận
+//            subject = "Your OTP Code"  // Tiêu đề email
+//            setText("Your OTP is: $otp")  // Nội dung email với OTP
+//        }
+//
+//        // Gửi email
+//        Transport.send(message)
+//        println("Email sent successfully")
+//    } catch (e: Exception) {
+//        e.printStackTrace()
+//        println("Error sending email: ${e.message}")
+//    }
+//}
+
+fun sendOtpEmail(userEmail: String, otp: Int) {
+    object : AsyncTask<Void, Void, Boolean>() {
+        override fun doInBackground(vararg params: Void): Boolean {
+            val senderEmail = "thanh08062004@gmail.com"
+            val senderPassword = "htbxnwhlhioywcuv"
+
+            val properties = Properties().apply {
+                put("mail.smtp.host", "smtp.gmail.com")
+                put("mail.smtp.port", "587")
+                put("mail.smtp.auth", "true")
+                put("mail.smtp.starttls.enable", "true")
+            }
+
+            try {
+                val session = Session.getInstance(properties, object : javax.mail.Authenticator() {
+                    override fun getPasswordAuthentication(): PasswordAuthentication {
+                        return PasswordAuthentication(senderEmail, senderPassword)
+                    }
+                })
+
+                val message = MimeMessage(session).apply {
+                    setFrom(InternetAddress(senderEmail))
+                    addRecipient(Message.RecipientType.TO, InternetAddress(userEmail))
+                    subject = "Your OTP Code"
+                    setText("Your OTP is: $otp")
+                }
+
+                Transport.send(message)
+                return true
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return false
+            }
+        }
+
+        override fun onPostExecute(success: Boolean) {
+            if (success) {
+                println("Email sent successfully")
+            } else {
+                println("Error sending email")
+            }
+        }
+    }.execute()
 }
 
 

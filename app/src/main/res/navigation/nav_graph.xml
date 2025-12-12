@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="com.example.iotapp.ui.dashboard.DashboardFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.example.iotapp.ui.dashboard.HomeFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_home">
+
+    </fragment>
     <fragment
         android:id="@+id/otpVerificationFragment"
         android:name="com.example.iotapp.ui.auth.OtpVerificationFragment"
@@ -30,4 +32,17 @@
         android:name="com.example.iotapp.ui.auth.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.iotapp.ui.dashboard.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.iotapp.ui.dashboard.InfoFragment"
+        android:label="InfoFragment" />
+    <fragment
+        android:id="@+id/pumperFragment"
+        android:name="com.example.iotapp.ui.dashboard.PumperFragment"
+        android:label="PumperFragment" />
 </navigation>
