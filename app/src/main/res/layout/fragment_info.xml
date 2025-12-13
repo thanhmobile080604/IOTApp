@@ -164,6 +164,15 @@
         app:layout_constraintStart_toStartOf="@id/view7"
         app:layout_constraintTop_toTopOf="@id/view7" />
 
+    <ImageView
+        android:id="@+id/icChatbot"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_chat_bot"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        app:layout_constraintEnd_toEndOf="@id/view"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

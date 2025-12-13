@@ -45,4 +45,9 @@
         android:id="@+id/pumperFragment"
         android:name="com.example.iotapp.ui.dashboard.PumperFragment"
         android:label="PumperFragment" />
+    <fragment
+        android:id="@+id/chatbotFragment"
+        android:name="com.example.iotapp.ui.chatbot.ChatbotFragment"
+        android:label="ChatbotFragment"
+        tools:layout="@layout/fragment_chatbot" />
 </navigation>

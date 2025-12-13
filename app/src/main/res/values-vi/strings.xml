@@ -4,7 +4,7 @@
     <string name="home">Trang chủ</string>
     <string name="outside_moisture">Độ ẩm ngoài trời</string>
     <string name="temperature">Nhiệt độ</string>
-    <string name="dirt_moisture">Độ ẩm đất</string>
+    <string name="dirt_moisture">Trạng thái mưa</string>
     <string name="connect">Kết nối</string>
     <string name="pumper_status">Trạng thái máy bơm</string>
     <string name="pumper_alarm">Hẹn giờ bơm</string>
@@ -24,7 +24,18 @@
     <string name="status_off">TẮT</string>
     <string name="invalid_time_message">Sai định dạng ngày/giờ</string>
     <string name="invalid_time_hint">Kiểm tra định dạng</string>
+    <string name="past_time_error">Thời gian không thể là quá khứ</string>
     <string name="no_schedule">Chưa đặt lịch</string>
     <string name="log_out">Đăng xuất</string>
+    <string name="chatbot">Chatbot</string>
+    <string name="text">Văn bản</string>
+    <string name="send">Gửi</string>
+    <string name="camera">Máy ảnh</string>
+    <string name="gallery">Thư viện</string>
+    <string name="file">Tệp</string>
+    <string name="back">Quay lại</string>
+    <string name="sending">Đang gửi...</string>
+    <string name="error_sending_message">Lỗi gửi tin nhắn</string>
+    <string name="thinking">Đang suy nghĩ...</string>
 </resources>
 

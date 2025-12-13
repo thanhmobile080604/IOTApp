@@ -3,6 +3,7 @@ package com.example.iotapp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.iotapp.model.PlantInformation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -23,4 +24,6 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val navigateToDashboard = MutableLiveData<Boolean>()
     val navigateToSignIn = MutableLiveData<Boolean>()
     val otp = MutableLiveData<String>()
+
+    val fireBaseInformation = MutableLiveData<PlantInformation>()
 }

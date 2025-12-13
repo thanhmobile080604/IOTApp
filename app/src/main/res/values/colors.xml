@@ -2,35 +2,30 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
+
     <!-- Primary Colors -->
     <color name="primary_blue">#FF2196F3</color>
     <color name="light_blue">#FFE3F2FD</color>
-    
+
     <!-- Gray Colors -->
     <color name="gray">#FF757575</color>
     <color name="light_gray">#FFE0E0E0</color>
     <color name="dark_gray">#FF424242</color>
-    
+
     <!-- Social Media Colors -->
     <color name="facebook_blue">#FF1877F2</color>
-    
+
     <!-- Status Colors -->
     <color name="success_green">#FF4CAF50</color>
-    <color name="error_red">#FFF44336</color>
     <color name="warning_orange">#FFFF9800</color>
     <color name="blue">#4A6CF7</color>
     <color name="blue_light">#AFC8FF</color>
     <color name="blue_lighter">#E3ECFF</color>
 
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="gray">#808080</color>
     <color name="gray_light">#BDBDBD</color>
     <color name="gray_lighter">#E0E0E0</color>
 
     <color name="error_red">#FF3B30</color>
-    <color name="success_green">#4CAF50</color>
     <color name="warning_yellow">#FFCC00</color>
 
     <color name="marker_dark">#202020</color>

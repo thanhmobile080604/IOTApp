@@ -91,4 +91,11 @@ dependencies {
     implementation("com.sun.mail:android-mail:1.6.7")
     implementation("com.sun.mail:android-activation:1.6.7")
 
+    // OkHttp for HTTP requests
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <!-- Bot avatar -->
+    <ImageView
+        android:id="@+id/ivBotIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_chat_bot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Message bubble -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        app:layout_constraintStart_toEndOf="@id/ivBotIcon"
+        app:layout_constraintTop_toTopOf="@id/ivBotIcon"
+        app:layout_constrainedWidth="true">
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:maxWidth="260dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:fontFamily="@font/freeman_regular"
+            android:lineSpacingExtra="3dp"
+            android:includeFontPadding="false"
+            android:hyphenationFrequency="normal"
+            tools:text="This is a long bot message to demonstrate how the text wraps naturally into multiple lines without being cut off or clipped in any way." />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

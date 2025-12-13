@@ -1,6 +1,9 @@
 package com.example.iotapp.ui.dashboard
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
@@ -21,6 +24,8 @@ import com.example.iotapp.base.BaseFragment
 import com.example.iotapp.base.PreferenceHelper
 import com.example.iotapp.base.setSingleClick
 import com.example.iotapp.databinding.FragmentPumperBinding
+import com.example.iotapp.model.PlantInformation
+import com.example.iotapp.receiver.ScheduleReceiver
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -29,6 +34,8 @@ import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ValueEventListener
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding::inflate) {
@@ -74,7 +81,6 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
         val newTempUnit = PreferenceHelper.getTempUnit(requireContext())
         if (newTempUnit != tempUnit) {
             tempUnit = newTempUnit
-            // 重新格式化温度显示
             binding.tvTemperatureReal.text = formatTemperature(cachedTempC)
         }
     }
@@ -103,6 +109,14 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
                     scheduleDate,
                     scheduleTime
                 )
+                val info = PlantInformation(
+                    temperature = tempValue ?: "--",
+                    humidity = humidity ?: "--",
+                    rainStatus = rainStatus ?: "--",
+                    connectStatus = if (isPumpOn) getString(R.string.online) else getString(R.string.offline_label),
+                    schedule = "$scheduleDate $scheduleTime"
+                )
+                mainViewModel.fireBaseInformation.value = info
                 Log.d(TAG, "Pumper data -> humidity=$humidity rain=$rainStatus temp=$tempValue relay=$relay date=$scheduleDate time=$scheduleTime")
             }
 
@@ -134,7 +148,7 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
 
         binding.tvPumperSwitch.text = createSwitchText(pumpOn)
         binding.tvOutsideMoistureReal.text = humidity?.let { "${it}%" } ?: "--"
-        binding.tvDirtMoistureReal.text = rainStatus ?: "--"
+        binding.tvRainStatusReal.text = rainStatus ?: "--"
         binding.tvTemperatureReal.text = formatTemperature(cachedTempC)
         binding.tvOnlineReal.text = if (pumpOn) getString(R.string.online) else getString(R.string.offline_label)
 
@@ -213,6 +227,30 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
             return
         }
 
+        // 检查时间是否在过去
+        val isPastTime = isTimeInPast(date, time)
+        if (isPastTime) {
+            Log.d(TAG, "Schedule time is in the past: date=$date time=$time")
+            markValidation(binding.etDate, false)
+            markValidation(binding.etTime, false)
+            binding.etDate.error = getString(R.string.past_time_error)
+            binding.etTime.error = getString(R.string.past_time_error)
+            Toast.makeText(requireContext(), getString(R.string.past_time_error), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // 计算目标时间的毫秒数
+        val scheduledTimeMillis = getScheduledTimeMillis(date, time)
+        if (scheduledTimeMillis == null) {
+            Log.e(TAG, "Failed to parse scheduled time: date=$date time=$time")
+            Toast.makeText(requireContext(), "Invalid time format", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // 设置 AlarmManager
+        val scheduleId = scheduledTimeMillis.toInt() // 使用时间戳的一部分作为 ID
+        scheduleAlarm(scheduledTimeMillis, scheduleId)
+
         val updates = mapOf(
             "schedule/date" to date,
             "schedule/time" to time,
@@ -220,7 +258,7 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
         )
         sensorRef.child("relay").updateChildren(updates).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Log.d(TAG, "Schedule saved date=$date time=$time")
+                Log.d(TAG, "Schedule saved date=$date time=$time, scheduled for ${java.util.Date(scheduledTimeMillis)}")
                 binding.tvAlarmDate.text = "${getString(R.string.date)} $date"
                 binding.tvHour.text = "${getString(R.string.time)} $time"
                 toggleDialog(false)
@@ -262,6 +300,66 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
         if (time.isBlank()) return false
         val regex = Regex("^([01]?\\d|2[0-3]):[0-5]\\d$")
         return regex.matches(time)
+    }
+
+    private fun isTimeInPast(date: String, time: String): Boolean {
+        return try {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            dateFormat.isLenient = false
+            val scheduledDateTime = dateFormat.parse("$date $time")
+            val currentDateTime = Calendar.getInstance().time
+            
+            scheduledDateTime?.before(currentDateTime) ?: false
+        } catch (e: Exception) {
+            Log.e(TAG, "Error parsing scheduled time: date=$date time=$time", e)
+            false
+        }
+    }
+
+    private fun getScheduledTimeMillis(date: String, time: String): Long? {
+        return try {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            dateFormat.isLenient = false
+            val scheduledDateTime = dateFormat.parse("$date $time")
+            scheduledDateTime?.time
+        } catch (e: Exception) {
+            Log.e(TAG, "Error parsing scheduled time: date=$date time=$time", e)
+            null
+        }
+    }
+
+    private fun scheduleAlarm(timeInMillis: Long, scheduleId: Int) {
+        try {
+            val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(requireContext(), ScheduleReceiver::class.java).apply {
+                action = ScheduleReceiver.ACTION_SCHEDULE_ON
+                putExtra(ScheduleReceiver.EXTRA_SCHEDULE_ID, scheduleId)
+            }
+            
+            val pendingIntent = PendingIntent.getBroadcast(
+                requireContext(),
+                scheduleId,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            
+            // 对于 Android 12+，使用 setAlarmClock 不需要特殊权限
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                val alarmClockInfo = AlarmManager.AlarmClockInfo(timeInMillis, pendingIntent)
+                alarmManager.setAlarmClock(alarmClockInfo, pendingIntent)
+            } else {
+                // 对于旧版本，使用 setExactAndAllowWhileIdle
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    timeInMillis,
+                    pendingIntent
+                )
+            }
+            
+            Log.d(TAG, "Alarm scheduled for ${Date(timeInMillis)} with ID=$scheduleId")
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to schedule alarm", e)
+        }
     }
 
     private fun markValidation(editText: EditText, isValid: Boolean) {

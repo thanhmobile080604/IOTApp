@@ -5,7 +5,7 @@
     <string name="home">Home</string>
     <string name="outside_moisture">Outside Moisture</string>
     <string name="temperature">Temperature</string>
-    <string name="dirt_moisture">Dirt Moisture</string>
+    <string name="dirt_moisture">Rain Status</string>
     <string name="connect">Connect</string>
     <string name="pumper_status">Pumper Status</string>
     <string name="pumper_alarm">Pumper Alarm</string>
@@ -27,6 +27,17 @@
     <string name="off">OFF</string>
     <string name="invalid_time_message">Please enter date/time in correct format</string>
     <string name="invalid_time_hint">Invalid format</string>
+    <string name="past_time_error">Time cannot be in the past</string>
     <string name="no_schedule">No schedule</string>
     <string name="log_out">Log out</string>
+    <string name="chatbot">Chatbot</string>
+    <string name="text">Text</string>
+    <string name="send">Send</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="file">File</string>
+    <string name="back">Back</string>
+    <string name="sending">Sending...</string>
+    <string name="error_sending_message">Error sending message</string>
+    <string name="thinking">Thinking...</string>
 </resources>

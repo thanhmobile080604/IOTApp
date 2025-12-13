@@ -131,7 +131,7 @@
         app:layout_constraintTop_toTopOf="@id/view2" />
 
     <ImageView
-        android:id="@+id/icDirtMoisture"
+        android:id="@+id/icRainStatus"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_margin="6dp"
@@ -192,7 +192,7 @@
         app:layout_constraintTop_toBottomOf="@id/icTemperature" />
 
     <TextView
-        android:id="@+id/tvDirtMoisture"
+        android:id="@+id/tvRainStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/freeman_regular"
@@ -200,8 +200,8 @@
         android:text="@string/dirt_moisture"
         android:textColor="@color/color_447661"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/icDirtMoisture"
-        app:layout_constraintTop_toBottomOf="@id/icDirtMoisture" />
+        app:layout_constraintStart_toStartOf="@id/icRainStatus"
+        app:layout_constraintTop_toBottomOf="@id/icRainStatus" />
 
     <TextView
         android:id="@+id/tvOnline"
@@ -336,7 +336,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvTemperature" />
 
     <TextView
-        android:id="@+id/tvDirtMoistureReal"
+        android:id="@+id/tvRainStatusReal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -345,8 +345,8 @@
         android:text="74%"
         android:textColor="@color/color_447661"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@id/tvDirtMoisture"
-        app:layout_constraintTop_toBottomOf="@id/tvDirtMoisture" />
+        app:layout_constraintStart_toStartOf="@id/tvRainStatus"
+        app:layout_constraintTop_toBottomOf="@id/tvRainStatus" />
 
     <TextView
         android:id="@+id/tvOnlineReal"
