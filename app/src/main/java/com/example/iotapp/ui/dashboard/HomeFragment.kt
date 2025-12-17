@@ -46,6 +46,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         icChatbot.setOnTouchListener { view, event ->
+            val screenWidth = resources.displayMetrics.widthPixels
+            val screenHeight = resources.displayMetrics.heightPixels
+            val viewWidth = view.width
+            val viewHeight = view.height
+
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     xDelta = event.rawX - view.x
@@ -64,9 +69,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     if (moveX > CLICK_THRESHOLD || moveY > CLICK_THRESHOLD) {
                         isActionMove = true
 
+                        var newX = event.rawX - xDelta
+                        var newY = event.rawY - yDelta
+
+                        newX = maxOf(0f, minOf(newX, screenWidth - viewWidth.toFloat()))
+                        newY = maxOf(0f, minOf(newY, screenHeight - viewHeight.toFloat()))
+
                         view.animate()
-                            .x(event.rawX - xDelta)
-                            .y(event.rawY - yDelta)
+                            .x(newX)
+                            .y(newY)
                             .setDuration(0)
                             .start()
                     }
@@ -84,7 +95,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
                         Log.d(TAG, "Click detected - Navigate to ChatbotFragment")
                         navigateTo(R.id.chatbotFragment)
-
                         view.performClick()
                     }
                 }
