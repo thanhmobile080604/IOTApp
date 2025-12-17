@@ -58,10 +58,6 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::infl
             Log.d(TAG, "Open temperature unit dropdown")
             showTempMenu()
         }
-        icChatbot.setSingleClick {
-            Log.d(TAG, "Navigate to ChatbotFragment")
-            navigateTo(R.id.chatbotFragment)
-        }
         logOut.setSingleClick {
             Log.d(TAG, "Log out clicked")
             authRepository.signOut()

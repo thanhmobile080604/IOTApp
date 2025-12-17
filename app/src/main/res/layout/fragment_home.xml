@@ -57,6 +57,15 @@
         android:src="@drawable/ic_info"
         android:background="@drawable/bg_346348_12"/>
 
+    <ImageView
+        android:id="@+id/icChatbot"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_chat_bot"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
