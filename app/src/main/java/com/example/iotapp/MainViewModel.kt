@@ -26,4 +26,5 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val otp = MutableLiveData<String>()
 
     val fireBaseInformation = MutableLiveData<PlantInformation>()
+    val isNetworkAvailable = MutableLiveData<Boolean>()
 }

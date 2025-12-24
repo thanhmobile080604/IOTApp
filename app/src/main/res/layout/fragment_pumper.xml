@@ -544,6 +544,7 @@
             app:layout_constraintTop_toTopOf="@id/bgDialog" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

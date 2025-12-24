@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.iotapp.R
@@ -105,7 +106,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    override fun initObserver() = Unit
+    override fun initObserver() {
+        mainViewModel.isNetworkAvailable.observe(viewLifecycleOwner) { isConnected ->
+            binding.loadingOverlay.visibility =
+                if (isConnected) View.GONE else View.VISIBLE
+        }
+    }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {

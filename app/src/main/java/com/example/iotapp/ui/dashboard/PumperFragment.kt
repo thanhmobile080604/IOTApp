@@ -93,25 +93,25 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
     private fun startSensorListener() {
         sensorListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val humidity = snapshot.child("humidity/value").getValue(String::class.java)
+                val humidity = snapshot.child("humidity/value").getValue(Double::class.java)
                 val rainStatus = snapshot.child("rain_status/value").getValue(String::class.java)
-                val tempValue = snapshot.child("temperature/value").getValue(String::class.java)
+                val tempValue = snapshot.child("temperature/value").getValue(Double::class.java)
                 val relay = snapshot.child("relay/value").getValue(String::class.java)
                 val scheduleDate = snapshot.child("relay/schedule/date").getValue(String::class.java)
                 val scheduleTime = snapshot.child("relay/schedule/time").getValue(String::class.java)
 
-                cachedTempC = tempValue?.toDoubleOrNull()
+                cachedTempC = tempValue
                 isPumpOn = relay.equals("ON", true)
                 updateUi(
-                    humidity,
+                    humidity.toString(),
                     rainStatus,
                     isPumpOn,
                     scheduleDate,
                     scheduleTime
                 )
                 val info = PlantInformation(
-                    temperature = tempValue ?: "--",
-                    humidity = humidity ?: "--",
+                    temperature = (tempValue ?: "--".toString()).toString(),
+                    humidity = (humidity ?: "--").toString(),
                     rainStatus = rainStatus ?: "--",
                     connectStatus = if (isPumpOn) getString(R.string.online) else getString(R.string.offline_label),
                     schedule = "$scheduleDate $scheduleTime"
@@ -227,7 +227,6 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
             return
         }
 
-        // 检查时间是否在过去
         val isPastTime = isTimeInPast(date, time)
         if (isPastTime) {
             Log.d(TAG, "Schedule time is in the past: date=$date time=$time")
@@ -239,7 +238,6 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
             return
         }
 
-        // 计算目标时间的毫秒数
         val scheduledTimeMillis = getScheduledTimeMillis(date, time)
         if (scheduledTimeMillis == null) {
             Log.e(TAG, "Failed to parse scheduled time: date=$date time=$time")
@@ -247,8 +245,7 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
             return
         }
 
-        // 设置 AlarmManager
-        val scheduleId = scheduledTimeMillis.toInt() // 使用时间戳的一部分作为 ID
+        val scheduleId = scheduledTimeMillis.toInt()
         scheduleAlarm(scheduledTimeMillis, scheduleId)
 
         val updates = mapOf(
@@ -342,13 +339,11 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
-            
-            // 对于 Android 12+，使用 setAlarmClock 不需要特殊权限
+
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
                 val alarmClockInfo = AlarmManager.AlarmClockInfo(timeInMillis, pendingIntent)
                 alarmManager.setAlarmClock(alarmClockInfo, pendingIntent)
             } else {
-                // 对于旧版本，使用 setExactAndAllowWhileIdle
                 alarmManager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
                     timeInMillis,

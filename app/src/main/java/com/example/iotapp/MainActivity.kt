@@ -14,17 +14,27 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.iotapp.base.AndroidConnectivityObserver
 import com.example.iotapp.base.BaseActivity
 import com.example.iotapp.base.PreferenceHelper
+import com.example.iotapp.base.isNetworkAvailable
 import com.example.iotapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
     private var handler: Handler? = null
+
+    private val network: AndroidConnectivityObserver by lazy {
+        AndroidConnectivityObserver(this)
+    }
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +60,17 @@ class MainActivity : BaseActivity() {
             StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build()
         )
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                network.isConnected.collect { isConnected ->
+                    viewModel.isNetworkAvailable.value = isConnected
+                }
+            }
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun initLanguage() {
