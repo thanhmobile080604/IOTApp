@@ -1,6 +1,7 @@
 package com.example.iotapp.ui.chatbot
 
 import android.Manifest
+import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
@@ -23,17 +24,15 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
+import androidx.core.content.edit
 
 class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBinding::inflate) {
 
     private val messageAdapter = ChatMessageAdapter { message -> onFileClick(message) }
     private val messages = mutableListOf<ChatMessage>()
-
-    // Ollama URL - For Android emulator use "http://10.0.2.2:11434"
-    // For physical device, use your computer's IP address: "http://YOUR_COMPUTER_IP:11434"
-    // Make sure Ollama is running and exposed to network: ollama serve
 
     private val ollamaBaseUrl = "https://ollama.com"
     private val ollamaModel = "gpt-oss:120b"
@@ -83,6 +82,7 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
         setupRecyclerView()
         setupStatusBar()
         setupKeyboardListener()
+        loadMessages()
     }
 
     override fun FragmentChatbotBinding.initListener() {
@@ -143,13 +143,10 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
     }
 
     private fun setupKeyboardListener() {
-        // Make input bar follow keyboard using WindowInsets
         ViewCompat.setOnApplyWindowInsetsListener(binding.inputBar) { view, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 
-            // Apply bottom margin/padding when keyboard is visible
-            // This makes the input bar stick to the top of the keyboard
             val bottomPadding = if (imeInsets.bottom > 0) {
                 imeInsets.bottom - systemBars.bottom
             } else {
@@ -163,7 +160,6 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
                 bottomPadding
             )
 
-            // Scroll to bottom when keyboard appears
             if (imeInsets.bottom > 0 && messages.isNotEmpty()) {
                 binding.rvMessages.postDelayed({
                     binding.rvMessages.smoothScrollToPosition(messages.size - 1)
@@ -174,18 +170,6 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
         }
     }
 
-//    private fun sendTextMessage(text: String) {
-//        val userMessage = ChatMessage(
-//            id = UUID.randomUUID().toString(),
-//            text = text,
-//            isUser = true
-//        )
-//        val plantInfo = mainViewModel.fireBaseInformation.value
-//        val prompt = buildPlantPrompt(plantInfo, text)
-//        addMessage(userMessage)
-//        sendToOllama(prompt)
-//    }
-//
     private fun sendImageMessage(imageUri: Uri) {
         val userMessage = ChatMessage(
             id = UUID.randomUUID().toString(),
@@ -200,16 +184,12 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
     }
 
     private fun sendTextMessage(text: String) {
-
-        // 1️⃣ User message (luôn add trước)
         val userMessage = ChatMessage(
             id = UUID.randomUUID().toString(),
             text = text,
             isUser = true
         )
         addMessage(userMessage)
-
-        // 2️⃣ Thinking message (giữ id để remove)
         val thinkingMessageId = UUID.randomUUID().toString()
         val thinkingMessage = ChatMessage(
             id = thinkingMessageId,
@@ -312,7 +292,6 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
                     if (inputStream != null) {
                         val downloadsDir =
                             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                // Use app-specific directory for Android 10+
                                 requireContext().getExternalFilesDir(android.os.Environment.DIRECTORY_DOWNLOADS)
                             } else {
                                 android.os.Environment.getExternalStoragePublicDirectory(
@@ -374,106 +353,6 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
         }
     }
 
-//    private fun sendToOllama(prompt: String) {
-//        // Show loading message
-//        val loadingMessage = ChatMessage(
-//            id = UUID.randomUUID().toString(),
-//            text = getString(R.string.thinking),
-//            isUser = false
-//        )
-//        val loadingIndex = messages.size
-//        messages.add(loadingMessage)
-//        messageAdapter.submitList(messages.toList())
-//
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val response = callOllamaCloud(plantInfo, text)
-//                withContext(Dispatchers.Main) {
-//                    // Remove loading message
-//                    messages.removeAt(loadingIndex)
-//                    // Add bot response
-//                    val botMessage = ChatMessage(
-//                        id = UUID.randomUUID().toString(),
-//                        text = response,
-//                        isUser = false
-//                    )
-//                    messages.add(botMessage)
-//                    messageAdapter.submitList(messages.toList()) {
-//                        binding.rvMessages.scrollToPosition(messages.size - 1)
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                Log.e(TAG, "Error calling Ollama API", e)
-//                withContext(Dispatchers.Main) {
-//                    // Remove loading message
-//                    messages.removeAt(loadingIndex)
-//                    // Add error message
-//                    val errorMessage = ChatMessage(
-//                        id = UUID.randomUUID().toString(),
-//                        text = "Error: ${e.message ?: getString(R.string.error_sending_message)}",
-//                        isUser = false
-//                    )
-//                    messages.add(errorMessage)
-//                    messageAdapter.submitList(messages.toList()) {
-//                        binding.rvMessages.scrollToPosition(messages.size - 1)
-//                    }
-//                    Toast.makeText(
-//                        requireContext(),
-//                        getString(R.string.error_sending_message),
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        }
-//    }
-
-//    private suspend fun callOllamaAPI(prompt: String): String = withContext(Dispatchers.IO) {
-//        try {
-//            // Build context from conversation history
-//            val context = buildContextFromHistory(prompt)
-//
-//            val jsonBody = JSONObject().apply {
-//                put("model", ollamaModel)
-//                put("prompt", context)
-//                put("stream", false)
-//            }
-//
-//            Log.d(TAG, "Calling Ollama API: $ollamaBaseUrl/api/generate with model: $ollamaModel")
-//
-//            val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaType())
-//            val request = Request.Builder()
-//                .url("$ollamaBaseUrl/api/generate")
-//                .post(requestBody)
-//                .addHeader("Content-Type", "application/json")
-//                .build()
-//
-//            Log.d(TAG, "Request URL: ${request.url}")
-//            Log.d(TAG, "Request body: ${jsonBody.toString()}")
-//
-//            val response = okHttpClient.newCall(request).execute()
-//            val responseBody = response.body?.string() ?: ""
-//
-//            Log.d(
-//                TAG,
-//                "Ollama API response code: ${response.code}, body length: ${responseBody.length}"
-//            )
-//
-//            if (response.isSuccessful) {
-//                val jsonResponse = JSONObject(responseBody)
-//                val botResponse = jsonResponse.optString("response", "No response")
-//                Log.d(TAG, "Bot response: $botResponse")
-//                botResponse
-//            } else {
-//                val errorMsg = "API call failed: ${response.code} - $responseBody"
-//                Log.e(TAG, errorMsg)
-//                throw Exception(errorMsg)
-//            }
-//        } catch (e: Exception) {
-//            Log.e(TAG, "Ollama API error", e)
-//            throw e
-//        }
-//    }
-
     private suspend fun callOllamaCloud(
         plantInfo: PlantInformation?,
         userText: String
@@ -507,6 +386,56 @@ class ChatbotFragment : BaseFragment<FragmentChatbotBinding>(FragmentChatbotBind
         json
             .getJSONObject("message")
             .getString("content")
+    }
+
+    private fun saveMessages() {
+        try {
+            val prefs = requireContext().getSharedPreferences("chatbot_prefs", Context.MODE_PRIVATE)
+            val messagesJson = JSONArray()
+            messages.forEach { message ->
+                val messageJson = JSONObject().apply {
+                    put("id", message.id)
+                    put("text", message.text)
+                    put("isUser", message.isUser)
+                    put("timestamp", message.timestamp)
+                    // Note: Uri cannot be serialized, so we skip imageUri and fileUri
+                }
+                messagesJson.put(messageJson)
+            }
+            prefs.edit { putString("MESSAGES_PREF_KEY", messagesJson.toString()) }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving messages", e)
+        }
+    }
+
+    private fun loadMessages() {
+        try {
+            val prefs = requireContext().getSharedPreferences("chatbot_prefs", Context.MODE_PRIVATE)
+            val messagesJsonString = prefs.getString("MESSAGES_PREF_KEY", null)
+            if (messagesJsonString != null) {
+                val messagesJson = JSONArray(messagesJsonString)
+                val loadedMessages = mutableListOf<ChatMessage>()
+                for (i in 0 until messagesJson.length()) {
+                    val messageJson = messagesJson.getJSONObject(i)
+                    val message = ChatMessage(
+                        id = messageJson.getString("id"),
+                        text = messageJson.getString("text"),
+                        isUser = messageJson.getBoolean("isUser"),
+                        timestamp = messageJson.optLong("timestamp", System.currentTimeMillis())
+                    )
+                    loadedMessages.add(message)
+                }
+                messages.clear()
+                messages.addAll(loadedMessages)
+                messageAdapter.submitList(messages.toList()) {
+                    if (messages.isNotEmpty()) {
+                        binding.rvMessages.scrollToPosition(messages.size - 1)
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading messages", e)
+        }
     }
 
 
@@ -677,6 +606,11 @@ Plant status:
                 binding.rvMessages.scrollToPosition(messages.size - 1)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        saveMessages()
+        super.onDestroyView()
     }
 
 }

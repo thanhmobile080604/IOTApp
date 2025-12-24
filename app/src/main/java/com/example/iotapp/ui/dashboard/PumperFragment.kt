@@ -74,7 +74,11 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
         }
     }
 
-    override fun initObserver() = Unit
+    override fun initObserver() {
+        mainViewModel.isNetworkAvailable.observe(viewLifecycleOwner) { isNetworkAvailable ->
+            binding.tvOnlineReal.text = if (isNetworkAvailable) getString(R.string.online) else getString(R.string.offline_label)
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -150,7 +154,6 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
         binding.tvOutsideMoistureReal.text = humidity?.let { "${it}%" } ?: "--"
         binding.tvRainStatusReal.text = rainStatus ?: "--"
         binding.tvTemperatureReal.text = formatTemperature(cachedTempC)
-        binding.tvOnlineReal.text = if (pumpOn) getString(R.string.online) else getString(R.string.offline_label)
 
         binding.tvAlarmDate.text = if (!scheduleDate.isNullOrBlank()) "${getString(R.string.date)} $scheduleDate" else getString(R.string.no_schedule)
         binding.tvHour.text = if (!scheduleTime.isNullOrBlank()) "${getString(R.string.time)} $scheduleTime" else ""
