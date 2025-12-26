@@ -1,9 +1,7 @@
 package com.example.iotapp
 
 import android.content.Context
-import android.content.IntentFilter
 import android.content.res.Configuration
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,10 +18,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.iotapp.base.AndroidConnectivityObserver
 import com.example.iotapp.base.BaseActivity
 import com.example.iotapp.base.PreferenceHelper
-import com.example.iotapp.base.isNetworkAvailable
 import com.example.iotapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -67,10 +63,6 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
-    }
-    
-    override fun onResume() {
-        super.onResume()
     }
 
     private fun initLanguage() {

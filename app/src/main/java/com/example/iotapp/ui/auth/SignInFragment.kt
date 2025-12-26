@@ -14,7 +14,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
     private val authRepository = AuthRepository()
 
-    override fun FragmentSignInBinding.initView() = Unit
+    override fun FragmentSignInBinding.initView() {
+        if(authRepository.isUserSignedIn()) {
+            navigateTo(R.id.homeFragment, inclusive = true)
+        }
+    }
 
     override fun FragmentSignInBinding.initListener() {
         btnSignIn.setSingleClick { handleSignIn() }
@@ -32,7 +36,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
         mainViewModel.navigateToDashboard.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate == true) {
-                navigateTo(R.id.homeFragment)
+                navigateTo(R.id.homeFragment, inclusive = true)
                 mainViewModel.navigateToDashboard.value = false
             }
         }

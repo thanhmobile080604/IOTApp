@@ -142,6 +142,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
+    override fun onBack() {
+
+    }
+
 
     override fun onDestroyView() {
         binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)

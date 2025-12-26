@@ -21,6 +21,9 @@ class SetPasswordFragment :
     private val authRepository = AuthRepository()
 
     override fun FragmentSetPasswordBinding.initView() {
+        btnBack.setSingleClick {
+            onBack()
+        } 
         setupPasswordVisibilityToggle()
     }
 

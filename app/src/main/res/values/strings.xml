@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">IOTApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="outside_moisture">Outside Moisture</string>
@@ -40,4 +40,13 @@
     <string name="sending">Sending...</string>
     <string name="error_sending_message">Error sending message</string>
     <string name="thinking">Thinking...</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="Continue">Continue</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="enter_email_address">Enter email address</string>
 </resources>

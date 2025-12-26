@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -12,8 +11,8 @@ import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +48,7 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
     private var tempUnit: String = "C"
 
     override fun FragmentPumperBinding.initView() {
+        disableBackPress(true)
         tempUnit = PreferenceHelper.getTempUnit(requireContext())
         startSensorListener()
     }

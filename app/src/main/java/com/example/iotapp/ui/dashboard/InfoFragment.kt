@@ -18,6 +18,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::infl
     private val authRepository = AuthRepository()
 
     override fun FragmentInfoBinding.initView() {
+        disableBackPress(true)
         tempUnit = PreferenceHelper.getTempUnit(requireContext())
         tvLanguageReal.text = currentLanguageLabel()
         tvTemperatureReal.text = getTempUnitLabel()
@@ -61,7 +62,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::infl
         logOut.setSingleClick {
             Log.d(TAG, "Log out clicked")
             authRepository.signOut()
-            navigateTo(R.id.signInFragment)
+            navigateTo(R.id.signInFragment, inclusive = true)
         }
     }
 

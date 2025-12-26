@@ -25,8 +25,8 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Sign Up"
+        android:layout_marginTop="2dp"
+        android:text="@string/sign_up"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -39,8 +39,8 @@
         android:id="@+id/tvFullNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Full Name"
+        android:layout_marginTop="10dp"
+        android:text="@string/full_name"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,6 @@
         android:layout_marginTop="8dp"
         android:hint="Enter full name"
         app:boxStrokeColor="@color/light_gray"
-        app:endIconMode="custom"
         app:endIconDrawable="@drawable/ic_eye"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Email Address"
+        android:text="@string/email_address"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,9 +86,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Enter email address"
+        android:hint="@string/enter_email_address"
         app:boxStrokeColor="@color/light_gray"
-        app:endIconMode="custom"
         app:endIconDrawable="@drawable/ic_eye"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,13 +104,86 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- New Password Input -->
+    <TextView
+        android:id="@+id/tvNewPasswordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/password"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilEmail" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/password"
+        app:boxStrokeColor="@color/light_gray"
+        app:endIconMode="password_toggle"
+        app:endIconDrawable="@drawable/ic_eye"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNewPasswordLabel"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNewPassword"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Confirm Password Input -->
+    <TextView
+        android:id="@+id/tvConfirmPasswordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/confirm_password"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilConfirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/confirm_password"
+        app:boxStrokeColor="@color/light_gray"
+        app:endIconMode="password_toggle"
+        app:endIconDrawable="@drawable/ic_eye"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvConfirmPasswordLabel"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            app:endIconMode="password_toggle"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- Continue Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnContinue"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:text="Continue"
+        android:layout_marginTop="10dp"
+        android:text="@string/Continue"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -120,7 +191,7 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilEmail" />
+        app:layout_constraintTop_toBottomOf="@id/tilConfirmPassword" />
 
     <!-- Sign In Link -->
     <LinearLayout
@@ -136,7 +207,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? "
+            android:text="@string/already_have_an_account"
             android:textColor="@color/gray"
             android:textSize="14sp" />
 
@@ -144,7 +215,7 @@
             android:id="@+id/tvSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -164,65 +235,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutSignIn" />
 
-    <!-- Or Text -->
-    <TextView
-        android:id="@+id/tvOr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-12dp"
-        android:background="@color/white"
-        android:paddingHorizontal="16dp"
-        android:text="Or"
-        android:textColor="@color/gray"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider" />
-
-    <!-- Social Login Buttons -->
-    <LinearLayout
-        android:id="@+id/layoutSocialLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvOr">
-
-        <!-- Google -->
-        <ImageView
-            android:id="@+id/btnGoogle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_social_button"
-            android:padding="6dp"
-            android:src="@drawable/ic_google"
-            android:backgroundTint="@color/white" />
-
-        <!-- Apple -->
-        <ImageView
-            android:id="@+id/btnApple"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_social_button"
-            android:padding="6dp"
-            android:src="@drawable/ic_apple"
-            android:backgroundTint="@color/white" />
-
-        <!-- Facebook -->
-        <ImageView
-            android:id="@+id/btnFacebook"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_social_button"
-            android:padding="6dp"
-            android:src="@drawable/ic_facebook"
-            android:backgroundTint="@color/white" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
