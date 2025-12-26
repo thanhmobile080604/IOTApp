@@ -8,6 +8,7 @@ import com.example.iotapp.base.BaseFragment
 import com.example.iotapp.base.setSingleClick
 import com.example.iotapp.databinding.FragmentSignInBinding
 import com.example.iotapp.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
@@ -15,9 +16,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
     private val authRepository = AuthRepository()
 
     override fun FragmentSignInBinding.initView() {
-        if(authRepository.isUserSignedIn()) {
-            navigateTo(R.id.homeFragment, inclusive = true)
-        }
     }
 
     override fun FragmentSignInBinding.initListener() {
@@ -96,5 +94,14 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
         }
 
         return isValid
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseAuth.getInstance().addAuthStateListener { auth ->
+            if (auth.currentUser != null) {
+                navigateTo(R.id.homeFragment, inclusive = true)
+            }
+        }
     }
 }
