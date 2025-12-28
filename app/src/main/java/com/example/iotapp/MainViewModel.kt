@@ -19,11 +19,22 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val errorMessage = MutableLiveData<String>()
 
     // Navigation
-    val navigateToOtp = MutableLiveData<Boolean>()
     val navigateToDashboard = MutableLiveData<Boolean>()
-    val navigateToSignIn = MutableLiveData<Boolean>()
     val otp = MutableLiveData<String>()
+    val fromForgetPassword = MutableLiveData<Boolean>()
 
-    val fireBaseInformation = MutableLiveData<PlantInformation>()
+    val fireBaseInformation = MutableLiveData<PlantInformation?>()
     val isNetworkAvailable = MutableLiveData<Boolean>()
-}
+
+    fun resetViewModel(){
+        userEmail.value = ""
+        fullName.value = ""
+        password.value = ""
+        isLoading.value = false
+        errorMessage.value = ""
+        navigateToDashboard.value = false
+        otp.value = ""
+        fromForgetPassword.value = false
+        fireBaseInformation.value = null
+    }
+ }

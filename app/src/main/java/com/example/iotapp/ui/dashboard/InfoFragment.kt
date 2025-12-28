@@ -2,12 +2,14 @@ package com.example.iotapp.ui.dashboard
 
 import android.util.Log
 import android.widget.PopupMenu
+import androidx.lifecycle.lifecycleScope
 import com.example.iotapp.R
 import com.example.iotapp.base.BaseFragment
 import com.example.iotapp.base.PreferenceHelper
 import com.example.iotapp.base.setSingleClick
 import com.example.iotapp.databinding.FragmentInfoBinding
 import com.example.iotapp.repository.AuthRepository
+import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.util.Locale
 
@@ -19,6 +21,10 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::infl
 
     override fun FragmentInfoBinding.initView() {
         disableBackPress(true)
+        lifecycleScope.launch {
+            val username = authRepository.getUsername()
+            tvTitle.text = getString(R.string.hi).uppercase() + ", " + username.uppercase()
+        }
         tempUnit = PreferenceHelper.getTempUnit(requireContext())
         tvLanguageReal.text = currentLanguageLabel()
         tvTemperatureReal.text = getTempUnitLabel()

@@ -16,12 +16,16 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
     private val authRepository = AuthRepository()
 
     override fun FragmentSignInBinding.initView() {
+        mainViewModel.resetViewModel()
     }
 
     override fun FragmentSignInBinding.initListener() {
         btnSignIn.setSingleClick { handleSignIn() }
         tvSignUp.setSingleClick {
             navigateTo(R.id.signUpFragment)
+        }
+        tvForgetPassword.setSingleClick {
+            navigateTo(R.id.forgetPasswordFragment)
         }
     }
 

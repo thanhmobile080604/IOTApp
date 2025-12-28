@@ -88,6 +88,10 @@ class OtpVerificationFragment : BaseFragment<FragmentOtpVerificationBinding>(Fra
             mainViewModel.errorMessage.value = ""
 
             if (otpInput == currentOtp) {
+                if(mainViewModel.fromForgetPassword.value == true) {
+                    navigateTo(R.id.setPasswordFragment, inclusive = true)
+                    return@launch
+                }
                 val firebaseUser = authRepository.getCurrentUser()
                 firebaseUser?.let { user ->
                     authRepository.updateUserVerificationStatus(user.uid, true)

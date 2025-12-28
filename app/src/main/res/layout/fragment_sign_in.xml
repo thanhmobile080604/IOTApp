@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Sign In"
+        android:text="@string/sign_in"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Email Address"
+        android:text="@string/email_address"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Enter email address"
+        android:hint="@string/enter_email_address"
         app:boxStrokeColor="@color/light_gray"
         app:endIconMode="custom"
         app:endIconDrawable="@drawable/ic_eye"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Password"
+        android:text="@string/password"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Enter your password"
+        android:hint="@string/enter_your_password"
         app:boxStrokeColor="@color/light_gray"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,13 +93,25 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tvForgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0.5"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword"
+        app:layout_constraintEnd_toEndOf="@id/tilPassword"
+        android:text="@string/forget_password"
+        android:textColor="@color/gray"
+        android:textSize="14sp" />
+
     <!-- Sign In Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:text="Sign In"
+        android:layout_marginTop="10dp"
+        android:text="@string/sign_in"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -107,7 +119,9 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+        app:layout_constraintTop_toBottomOf="@id/tvForgetPassword" />
+
+
 
     <!-- Sign Up Link -->
     <LinearLayout
@@ -123,7 +137,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? "
+            android:text="@string/don_t_have_an_account"
             android:textColor="@color/gray"
             android:textSize="14sp" />
 
@@ -131,7 +145,7 @@
             android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Account"
+            android:text="@string/create_account"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"

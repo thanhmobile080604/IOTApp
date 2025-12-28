@@ -50,4 +50,8 @@
         android:name="com.example.iotapp.ui.chatbot.ChatbotFragment"
         android:label="ChatbotFragment"
         tools:layout="@layout/fragment_chatbot" />
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.example.iotapp.ui.auth.ForgetPasswordFragment"
+        android:label="ForgetPasswordFragment" />
 </navigation>

@@ -79,6 +79,49 @@ class AuthRepository {
         }
     }
 
+    suspend fun sendPasswordResetEmail(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener {}
+    }
+
+    suspend fun isEmailAlreadyRegistered(email: String): Boolean {
+        val normalizedEmail = email.trim().lowercase()
+
+        return try {
+            val querySnapshot = firestore
+                .collection("users")
+                .whereEqualTo("email", normalizedEmail)
+                .limit(1)
+                .get()
+                .await()
+
+            !querySnapshot.isEmpty
+        } catch (e: Exception) {
+            Log.e(TAG, "Error checking email in Firestore", e)
+            false
+        }
+    }
+
+    suspend fun getUsername(): String {
+        val currentUserId = auth.currentUser?.uid ?: return ""
+
+        return try {
+            val documentSnapshot = firestore
+                .collection("users")
+                .document(currentUserId)
+                .get()
+                .await()
+
+            if (!documentSnapshot.exists()) return ""
+            documentSnapshot.getString("fullName") ?: ""
+        } catch (exception: Exception) {
+            Log.e(TAG, "Error getting username", exception)
+            ""
+        }
+    }
+
+
+
     suspend fun getUserData(uid: String): Result<Map<String, Any>?> {
         return try {
             val document = firestore.collection("users")
