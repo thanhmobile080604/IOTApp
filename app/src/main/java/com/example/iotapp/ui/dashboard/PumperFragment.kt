@@ -97,14 +97,14 @@ class PumperFragment : BaseFragment<FragmentPumperBinding>(FragmentPumperBinding
     private fun startSensorListener() {
         sensorListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val humidity = snapshot.child("humidity/value").getValue(Double::class.java)
+                val humidity = snapshot.child("humidity/value").getValue(String::class.java)
                 val rainStatus = snapshot.child("rain_status/value").getValue(String::class.java)
-                val tempValue = snapshot.child("temperature/value").getValue(Double::class.java)
+                val tempValue = snapshot.child("temperature/value").getValue(String::class.java)
                 val relay = snapshot.child("relay/value").getValue(String::class.java)
                 val scheduleDate = snapshot.child("relay/schedule/date").getValue(String::class.java)
                 val scheduleTime = snapshot.child("relay/schedule/time").getValue(String::class.java)
 
-                cachedTempC = tempValue
+                cachedTempC = tempValue.toString().toDoubleOrNull()
                 isPumpOn = relay.equals("ON", true)
                 updateUi(
                     humidity.toString(),
